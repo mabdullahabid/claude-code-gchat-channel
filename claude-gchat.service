@@ -1,0 +1,21 @@
+[Unit]
+Description=Claude Code Google Chat Channel
+After=network.target
+
+[Service]
+Type=simple
+User=clawdbot
+WorkingDirectory=/home/clawdbot/repos/claude-code-gchat-channel
+Environment=NODE_ENV=production
+Environment=GCHAT_PORT=8788
+Environment=GCHAT_HOST=0.0.0.0
+# Google credentials loaded from environment file
+EnvironmentFile=/home/clawdbot/repos/claude-code-gchat-channel/.env
+ExecStart=/usr/bin/node dist/index.js
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
